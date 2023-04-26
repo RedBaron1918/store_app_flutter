@@ -5,12 +5,10 @@ import 'package:storeapp/model/product_model.dart';
 class Services {
   static Future<ProductList> fetchProductData(String productUrl) async {
     final response = await http.get(Uri.parse(productUrl));
-    print(response.statusCode);
     if (response.statusCode == 200 || response.statusCode == 304) {
       final decodedResponse = jsonDecode(response.body);
 
       final productList = ProductList.fromJson(decodedResponse);
-      print(productList);
       return productList;
     } else {
       throw Exception('Failed to fetch data');

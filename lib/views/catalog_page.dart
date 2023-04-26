@@ -9,7 +9,7 @@ class CatalogPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: ColorConstants.backgroundColor,
       appBar: AppBar(
-        title: Text('CatalogPage'),
+        title: const Text('CatalogPage'),
       ),
     );
   }
