@@ -3,7 +3,7 @@ import 'package:transparent_image/transparent_image.dart';
 
 class FadeInImageWidget extends StatelessWidget {
   const FadeInImageWidget(
-      {this.fit,
+      {this.fit = BoxFit.cover,
       this.radius = 10,
       this.height,
       required this.photo,
@@ -20,7 +20,7 @@ class FadeInImageWidget extends StatelessWidget {
         placeholder: kTransparentImage,
         image: photo,
         height: height,
-        fit: BoxFit.cover,
+        fit: fit,
       ),
     );
   }

@@ -8,8 +8,10 @@ class IconTextWidget extends StatelessWidget {
     this.textColor = const Color(0xFF333333),
     this.iconSize,
     this.textSize = 22,
+    this.align = MainAxisAlignment.start,
     super.key,
   });
+  final MainAxisAlignment align;
   final IconData icon;
   final String text;
   final Color color;
@@ -19,6 +21,7 @@ class IconTextWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: align,
       children: [
         Icon(
           icon,

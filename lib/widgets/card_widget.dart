@@ -39,7 +39,7 @@ class _CardWidgetState extends State<CardWidget> {
                   width: MediaQuery.of(context).size.width * 0.6,
                   height: 140,
                   child: FadeInImageWidget(
-                    photo: widget.product!.thumbnail ?? '',
+                    photo: widget.product!.images![0],
                     radius: 6,
                     fit: BoxFit.cover,
                   ),

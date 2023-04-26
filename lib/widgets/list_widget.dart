@@ -7,9 +7,11 @@ class ListWidget extends StatelessWidget {
     required this.productData,
     required this.builder,
     required this.dir,
+    required this.count,
   }) : super(key: key);
 
   final ProductList productData;
+  final int count;
   final Widget Function(BuildContext context, Product? product) builder;
   final Axis dir;
 
@@ -19,13 +21,12 @@ class ListWidget extends StatelessWidget {
       shrinkWrap: true,
       physics: const BouncingScrollPhysics(),
       scrollDirection: dir,
-      itemCount: 20,
+      itemCount: count,
       itemBuilder: (context, index) {
-        final roomId = productData.products?[index].id;
-        final room = productData.products?[roomId!];
+        Product? product = productData.products?[index];
         return InkWell(
           onTap: () {},
-          child: builder(context, room),
+          child: builder(context, product),
         );
       },
     );
