@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:storeapp/const_colors.dart';
 import 'package:storeapp/model/product_model.dart';
-import 'package:storeapp/widgets/card_widget.dart';
+import 'package:storeapp/widgets/cards/card_widget.dart';
 import 'package:storeapp/widgets/fade_in_image_widget.dart';
 import 'package:storeapp/widgets/future_widget.dart';
 import 'package:storeapp/widgets/get_grid_item.dart';
-import 'package:storeapp/widgets/grid_card.dart';
-import 'package:storeapp/widgets/icon_text_widget.dart';
+import 'package:storeapp/widgets/cards/grid_card.dart';
+import 'package:storeapp/widgets/icons/icon_text_widget.dart';
 import 'package:storeapp/widgets/list_widget.dart';
 import 'package:storeapp/widgets/search_bar.dart';
 import 'package:storeapp/widgets/sliver_appbar_widget.dart';
@@ -93,7 +93,8 @@ class _HomeState extends State<HomePage> {
                         ),
                         isList
                             ? SizedBox(
-                                height: 284,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.33,
                                 child: ListWidget(
                                   count: firstList.length,
                                   productData: ProductList(products: firstList),

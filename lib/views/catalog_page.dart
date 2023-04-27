@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:storeapp/const_colors.dart';
 import 'package:storeapp/model/category_card_model.dart';
-import 'package:storeapp/widgets/category_card.dart';
+import 'package:storeapp/model/product_model.dart';
+import 'package:storeapp/utils/services.dart';
+import 'package:storeapp/widgets/cards/category_card.dart';
+import 'package:storeapp/widgets/future_widget.dart';
+import 'package:storeapp/widgets/icons/circle_icon.dart';
+import 'package:storeapp/widgets/search_bar.dart';
 
 class CatalogPage extends StatefulWidget {
   const CatalogPage({super.key});
@@ -32,31 +37,122 @@ class _CatalogPageState extends State<CatalogPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: Column(
-        children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.06,
-            child: ListView.builder(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemCount: categoryCardModelList.length,
-              itemBuilder: (context, index) {
-                final categoryCardModel = categoryCardModelList[index];
-                return CategoryCard(
-                  wasPressed: () {
-                    setState(() {
-                      _selectedCardModel = categoryCardModel;
-                    });
-                  },
-                  categoryCardName: categoryCardModel.categoryCardModelName,
-                  isSelected: _selectedCardModel == categoryCardModel,
-                );
-              },
+      backgroundColor: ColorConstants.backgroundColor,
+      extendBody: true,
+      body: SafeArea(
+        child: CustomScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          slivers: [
+            SliverAppBar(
+              toolbarHeight: 80.10,
+              backgroundColor: ColorConstants.backgroundColor,
+              flexibleSpace: SafeArea(
+                child: Container(
+                  color: ColorConstants.backgroundColor,
+                  padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Catalog",
+                        style: TextStyle(
+                            fontSize: 35,
+                            fontWeight: FontWeight.bold,
+                            color: ColorConstants.titleColor),
+                      )
+                    ],
+                  ),
+                ),
+              ),
             ),
-          ),
-        ],
+            SliverFillRemaining(
+              hasScrollBody: false,
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.06,
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: categoryCardModelList.length,
+                      itemBuilder: (context, index) {
+                        final categoryCardModel = categoryCardModelList[index];
+                        return CategoryCard(
+                          wasPressed: () {
+                            setState(() {
+                              _selectedCardModel = categoryCardModel;
+                            });
+                          },
+                          categoryCardName:
+                              categoryCardModel.categoryCardModelName,
+                          isSelected: _selectedCardModel == categoryCardModel,
+                        );
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: const [
+                      Expanded(child: SearchBar()),
+                      CircleIcon(icon: Icons.tune),
+                    ],
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
 }
+
+// appBar: AppBar(),
+//       body: Column(
+//         children: [
+//           SizedBox(
+//             height: MediaQuery.of(context).size.height * 0.06,
+//             child: ListView.builder(
+//               shrinkWrap: true,
+//               scrollDirection: Axis.horizontal,
+//               itemCount: categoryCardModelList.length,
+//               itemBuilder: (context, index) {
+//                 final categoryCardModel = categoryCardModelList[index];
+//                 return CategoryCard(
+//                   wasPressed: () {
+//                     setState(() {
+//                       _selectedCardModel = categoryCardModel;
+//                     });
+//                   },
+//                   categoryCardName: categoryCardModel.categoryCardModelName,
+//                   isSelected: _selectedCardModel == categoryCardModel,
+//                 );
+//               },
+//             ),
+//           ),
+//         ],
+//       ),
+
+
+
+
+
+
+  // child: FutureWidget(
+              //   futureData: Services.futureData,
+              //   builder: (AsyncSnapshot<ProductList> snapshot) {
+              //     final products = snapshot.data?.products ?? [];
+              //     final firstList = products.take(10).toList();
+              //     return Padding(
+              //       padding: const EdgeInsets.all(8.0),
+              //       child: Column(
+              //         mainAxisSize: MainAxisSize.max,
+              //         children: [],
+              //       ),
+              //     );
+              //   },
+              // ),

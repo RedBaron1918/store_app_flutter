@@ -17,9 +17,9 @@ class GetGridItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      padding: EdgeInsets.all(2),
+      padding: const EdgeInsets.all(2),
       shrinkWrap: true,
-      physics: AlwaysScrollableScrollPhysics(),
+      physics: const AlwaysScrollableScrollPhysics(),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: crossAxisCount,
       ),

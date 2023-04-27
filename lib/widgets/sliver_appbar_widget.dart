@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:storeapp/const_colors.dart';
-import 'package:storeapp/widgets/circle_icon.dart';
+import 'package:storeapp/widgets/icons/circle_icon.dart';
 
-import 'icon_text_widget.dart';
+import 'icons/icon_text_widget.dart';
 
 class SliverAppBarWidget extends StatelessWidget {
   const SliverAppBarWidget({
@@ -44,7 +44,7 @@ class SliverAppBarWidget extends StatelessWidget {
                       iconColor: Colors.black,
                       callBack: callback,
                     )
-                  : SizedBox(),
+                  : const SizedBox(),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,

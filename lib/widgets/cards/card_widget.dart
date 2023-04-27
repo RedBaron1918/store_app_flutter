@@ -35,7 +35,7 @@ class _CardWidgetState extends State<CardWidget> {
             Stack(
               children: [
                 SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.6,
+                  width: MediaQuery.of(context).size.width * 0.45,
                   height: 140,
                   child: FadeInImageWidget(
                     photo: widget.product!.images![0],
@@ -46,7 +46,10 @@ class _CardWidgetState extends State<CardWidget> {
                 const Positioned(
                   top: 8,
                   right: 8,
-                  child: Icon(Icons.favorite),
+                  child: Icon(
+                    Icons.favorite,
+                    color: Colors.red,
+                  ),
                 )
               ],
             ),
@@ -59,7 +62,9 @@ class _CardWidgetState extends State<CardWidget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.product?.title ?? '',
+                    (widget.product?.title?.length ?? 0) > 13
+                        ? '${widget.product!.title!.substring(0, 13)}...'
+                        : widget.product?.title ?? '',
                     style: const TextStyle(
                       color: Color(0xFF333333),
                       fontWeight: FontWeight.w600,
