@@ -41,7 +41,7 @@ class _HomeState extends State<HomePage> {
       extendBody: true,
       body: SafeArea(
         child: CustomScrollView(
-          physics: AlwaysScrollableScrollPhysics(),
+          physics: const AlwaysScrollableScrollPhysics(),
           slivers: [
             SliverAppBarWidget(
               leading: true,

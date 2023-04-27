@@ -3,9 +3,12 @@ import 'package:storeapp/const_colors.dart';
 import 'package:storeapp/model/category_card_model.dart';
 import 'package:storeapp/model/product_model.dart';
 import 'package:storeapp/utils/services.dart';
+import 'package:storeapp/widgets/cards/card_widget.dart';
 import 'package:storeapp/widgets/cards/category_card.dart';
+import 'package:storeapp/widgets/fade_in_image_widget.dart';
 import 'package:storeapp/widgets/future_widget.dart';
 import 'package:storeapp/widgets/icons/circle_icon.dart';
+import 'package:storeapp/widgets/list_widget.dart';
 import 'package:storeapp/widgets/search_bar.dart';
 
 class CatalogPage extends StatefulWidget {
@@ -23,15 +26,11 @@ class _CatalogPageState extends State<CatalogPage> {
     CategoryCardModel("jewerly"),
     CategoryCardModel("clothes")
   ];
-  List<CategoryCardModel>? _categoryCardModelListOf;
   CategoryCardModel? _selectedCardModel;
 
   @override
   void initState() {
     super.initState();
-    setState(() {
-      _categoryCardModelListOf = List.of(categoryCardModelList);
-    });
   }
 
   @override
@@ -49,7 +48,7 @@ class _CatalogPageState extends State<CatalogPage> {
               flexibleSpace: SafeArea(
                 child: Container(
                   color: ColorConstants.backgroundColor,
-                  padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                  padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -91,7 +90,7 @@ class _CatalogPageState extends State<CatalogPage> {
                       },
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   Row(
@@ -100,6 +99,47 @@ class _CatalogPageState extends State<CatalogPage> {
                       Expanded(child: SearchBar()),
                       CircleIcon(icon: Icons.tune),
                     ],
+                  ),
+                  FutureWidget(
+                    futureData: Services.futureData,
+                    builder: (AsyncSnapshot<ProductList> snapshot) {
+                      final products = snapshot.data?.products ?? [];
+                      final firstList = products.take(10).toList();
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.33,
+                              child: ListWidget(
+                                count: firstList.length,
+                                productData: ProductList(products: firstList),
+                                dir: Axis.horizontal,
+                                builder: (context, product) {
+                                  return CardWidget(product: product!);
+                                },
+                              ),
+                            ),
+                            const FadeInImageWidget(
+                              photo:
+                                  'https://i.ytimg.com/vi/c3xmfpugW-0/maxresdefault.jpg',
+                            ),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.33,
+                              child: ListWidget(
+                                count: firstList.length,
+                                productData: ProductList(products: firstList),
+                                dir: Axis.horizontal,
+                                builder: (context, product) {
+                                  return CardWidget(product: product!);
+                                },
+                              ),
+                            )
+                          ],
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
@@ -110,49 +150,3 @@ class _CatalogPageState extends State<CatalogPage> {
     );
   }
 }
-
-// appBar: AppBar(),
-//       body: Column(
-//         children: [
-//           SizedBox(
-//             height: MediaQuery.of(context).size.height * 0.06,
-//             child: ListView.builder(
-//               shrinkWrap: true,
-//               scrollDirection: Axis.horizontal,
-//               itemCount: categoryCardModelList.length,
-//               itemBuilder: (context, index) {
-//                 final categoryCardModel = categoryCardModelList[index];
-//                 return CategoryCard(
-//                   wasPressed: () {
-//                     setState(() {
-//                       _selectedCardModel = categoryCardModel;
-//                     });
-//                   },
-//                   categoryCardName: categoryCardModel.categoryCardModelName,
-//                   isSelected: _selectedCardModel == categoryCardModel,
-//                 );
-//               },
-//             ),
-//           ),
-//         ],
-//       ),
-
-
-
-
-
-
-  // child: FutureWidget(
-              //   futureData: Services.futureData,
-              //   builder: (AsyncSnapshot<ProductList> snapshot) {
-              //     final products = snapshot.data?.products ?? [];
-              //     final firstList = products.take(10).toList();
-              //     return Padding(
-              //       padding: const EdgeInsets.all(8.0),
-              //       child: Column(
-              //         mainAxisSize: MainAxisSize.max,
-              //         children: [],
-              //       ),
-              //     );
-              //   },
-              // ),

@@ -20,8 +20,8 @@ class GridCard extends StatelessWidget {
             ),
             Center(
               child: Container(
-                padding: EdgeInsets.all(10.0),
-                child: Text("Title under"),
+                padding: const EdgeInsets.all(10.0),
+                child: const Text("Title under"),
               ),
             ),
           ],
