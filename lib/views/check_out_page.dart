@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class CheckOutPage extends StatelessWidget {
   const CheckOutPage({super.key});
 

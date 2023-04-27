@@ -91,3 +91,5 @@ class Product {
             images == null ? [] : List<dynamic>.from(images!.map((x) => x)),
       };
 }
+
+enum ViewType { grid, list }

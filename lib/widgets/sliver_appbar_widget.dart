@@ -10,11 +10,15 @@ class SliverAppBarWidget extends StatelessWidget {
     required this.text,
     required this.bgColor,
     required this.txtColor,
+    required this.leading,
+    this.callback,
     super.key,
   });
   final String text;
   final Color bgColor;
   final Color txtColor;
+  final bool leading;
+  final Function? callback;
 
   @override
   Widget build(BuildContext context) {
@@ -33,11 +37,14 @@ class SliverAppBarWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const CircleIcon(
-                icon: Icons.grid_view_outlined,
-                iconSize: 25,
-                iconColor: Colors.black,
-              ),
+              leading
+                  ? CircleIcon(
+                      icon: Icons.grid_view_outlined,
+                      iconSize: 25,
+                      iconColor: Colors.black,
+                      callBack: callback,
+                    )
+                  : SizedBox(),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,

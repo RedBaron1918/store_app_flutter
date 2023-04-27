@@ -4,6 +4,8 @@ import 'package:storeapp/model/product_model.dart';
 import 'package:storeapp/widgets/card_widget.dart';
 import 'package:storeapp/widgets/fade_in_image_widget.dart';
 import 'package:storeapp/widgets/future_widget.dart';
+import 'package:storeapp/widgets/get_grid_item.dart';
+import 'package:storeapp/widgets/grid_card.dart';
 import 'package:storeapp/widgets/icon_text_widget.dart';
 import 'package:storeapp/widgets/list_widget.dart';
 import 'package:storeapp/widgets/search_bar.dart';
@@ -18,6 +20,20 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomeState extends State<HomePage> {
+  ViewType _viewType = ViewType.list;
+  bool isList = true;
+  void changeLayout() {
+    if (_viewType == ViewType.list) {
+      _viewType = ViewType.grid;
+      isList = false;
+    } else {
+      _viewType = ViewType.list;
+      isList = true;
+    }
+
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,31 +41,32 @@ class _HomeState extends State<HomePage> {
       extendBody: true,
       body: SafeArea(
         child: CustomScrollView(
-          physics: const BouncingScrollPhysics(),
+          physics: AlwaysScrollableScrollPhysics(),
           slivers: [
             SliverAppBarWidget(
+              leading: true,
+              callback: () {
+                changeLayout();
+              },
               text: '',
               bgColor: ColorConstants.backgroundColor,
               txtColor: Colors.black,
             ),
-            SliverToBoxAdapter(
+            SliverFillRemaining(
+              hasScrollBody: false,
               child: FutureWidget(
                 futureData: Services.futureData,
                 builder: (AsyncSnapshot<ProductList> snapshot) {
                   final products = snapshot.data?.products ?? [];
                   final firstList = products.take(10).toList();
-                  // final secondList = products.skip(10).take(10).toList();
-                  // final thirdList = products.skip(20).take(10).toList();
                   return Padding(
-                    padding: const EdgeInsets.all(12),
+                    padding: const EdgeInsets.all(8.0),
                     child: Column(
+                      mainAxisSize: MainAxisSize.max,
                       children: [
                         const FadeInImageWidget(
                           photo:
                               'https://i.ytimg.com/vi/c3xmfpugW-0/maxresdefault.jpg',
-                        ),
-                        const SizedBox(
-                          height: 10,
                         ),
                         const SizedBox(
                           height: 10,
@@ -74,28 +91,30 @@ class _HomeState extends State<HomePage> {
                             Text('View All')
                           ],
                         ),
-                        SizedBox(
-                          height: 284,
-                          child: ListWidget(
-                            count: firstList.length,
-                            productData: ProductList(products: firstList),
-                            dir: Axis.horizontal,
-                            builder: (context, product) {
-                              return CardWidget(product: product!);
-                            },
-                          ),
-                        ),
-                        SizedBox(
-                          height: 284,
-                          child: ListWidget(
-                            count: firstList.length,
-                            productData: ProductList(products: firstList),
-                            dir: Axis.horizontal,
-                            builder: (context, product) {
-                              return CardWidget(product: product!);
-                            },
-                          ),
-                        ),
+                        isList
+                            ? SizedBox(
+                                height: 284,
+                                child: ListWidget(
+                                  count: firstList.length,
+                                  productData: ProductList(products: firstList),
+                                  dir: Axis.horizontal,
+                                  builder: (context, product) {
+                                    return CardWidget(product: product!);
+                                  },
+                                ),
+                              )
+                            : SizedBox(
+                                height: MediaQuery.of(context).size.height * 1,
+                                child: GetGridItem(
+                                    viewType: _viewType,
+                                    productData:
+                                        ProductList(products: firstList),
+                                    crossAxisCount: 2,
+                                    builder: (context, product) {
+                                      return GridCard(productData: product!);
+                                    },
+                                    count: firstList.length),
+                              ),
                       ],
                     ),
                   );
