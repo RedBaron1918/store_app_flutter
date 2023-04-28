@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:storeapp/model/product_model.dart';
+import 'package:storeapp/views/detail_page.dart';
 
 class ListWidget extends StatelessWidget {
   const ListWidget({
@@ -23,11 +24,8 @@ class ListWidget extends StatelessWidget {
       scrollDirection: dir,
       itemCount: count,
       itemBuilder: (context, index) {
-        Product? product = productData.products?[index];
-        return InkWell(
-          onTap: () {},
-          child: builder(context, product),
-        );
+        Product product = productData.products![index];
+        return builder(context, product);
       },
     );
   }

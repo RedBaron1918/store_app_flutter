@@ -10,7 +10,6 @@ import 'package:storeapp/widgets/icons/icon_text_widget.dart';
 import 'package:storeapp/widgets/list_widget.dart';
 import 'package:storeapp/widgets/search_bar.dart';
 import 'package:storeapp/widgets/sliver_appbar_widget.dart';
-
 import '../utils/services.dart';
 
 class HomePage extends StatefulWidget {
@@ -59,6 +58,7 @@ class _HomeState extends State<HomePage> {
                 builder: (AsyncSnapshot<ProductList> snapshot) {
                   final products = snapshot.data?.products ?? [];
                   final firstList = products.take(10).toList();
+                  final secondList = products.skip(10).take(10).toList();
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
@@ -92,30 +92,22 @@ class _HomeState extends State<HomePage> {
                           ],
                         ),
                         isList
-                            ? SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.33,
-                                child: ListWidget(
-                                  count: firstList.length,
-                                  productData: ProductList(products: firstList),
-                                  dir: Axis.horizontal,
-                                  builder: (context, product) {
-                                    return CardWidget(product: product!);
-                                  },
-                                ),
-                              )
-                            : SizedBox(
-                                height: MediaQuery.of(context).size.height * 1,
-                                child: GetGridItem(
-                                    viewType: _viewType,
-                                    productData:
-                                        ProductList(products: firstList),
-                                    crossAxisCount: 2,
-                                    builder: (context, product) {
-                                      return GridCard(productData: product!);
-                                    },
-                                    count: firstList.length),
-                              ),
+                            ? ListLayout(data: firstList)
+                            : GridLayout(viewType: _viewType, data: firstList),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: const [
+                            IconTextWidget(
+                              icon: Icons.star,
+                              text: "Popular Items",
+                              color: Colors.red,
+                            ),
+                            Text('View All')
+                          ],
+                        ),
+                        isList
+                            ? ListLayout(data: secondList)
+                            : GridLayout(viewType: _viewType, data: secondList)
                       ],
                     ),
                   );
@@ -124,6 +116,56 @@ class _HomeState extends State<HomePage> {
             )
           ],
         ),
+      ),
+    );
+  }
+}
+
+class GridLayout extends StatelessWidget {
+  const GridLayout({
+    super.key,
+    required ViewType viewType,
+    required this.data,
+  }) : _viewType = viewType;
+
+  final ViewType _viewType;
+  final List<Product> data;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * 1,
+      child: GetGridItem(
+          viewType: _viewType,
+          productData: ProductList(products: data),
+          crossAxisCount: 2,
+          builder: (context, product) {
+            return GridCard(productData: product!);
+          },
+          count: data.length),
+    );
+  }
+}
+
+class ListLayout extends StatelessWidget {
+  const ListLayout({
+    super.key,
+    required this.data,
+  });
+
+  final List<Product> data;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * 0.30,
+      child: ListWidget(
+        count: data.length,
+        productData: ProductList(products: data),
+        dir: Axis.horizontal,
+        builder: (context, product) {
+          return CardWidget(product: product!);
+        },
       ),
     );
   }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:storeapp/const_colors.dart';
 import 'package:storeapp/widgets/icons/circle_icon.dart';
-import 'package:storeapp/widgets/sliver_appbar_widget.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
