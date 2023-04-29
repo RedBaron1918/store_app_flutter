@@ -31,7 +31,7 @@ class IconTextWidgetColumn extends StatelessWidget {
         color: backgroundColor,
         borderRadius: BorderRadius.circular(10),
       ),
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       child: Column(
         mainAxisAlignment: align,
         crossAxisAlignment: cross,

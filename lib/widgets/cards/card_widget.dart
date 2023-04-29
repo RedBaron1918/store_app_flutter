@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:storeapp/const_colors.dart';
 import 'package:storeapp/model/product_model.dart';
 import 'package:storeapp/widgets/fade_in_image_widget.dart';
+import 'package:storeapp/widgets/icons/provider_icon.dart';
 import 'package:storeapp/widgets/text_container.dart';
 
 class CardWidget extends StatefulWidget {
@@ -44,13 +45,11 @@ class _CardWidgetState extends State<CardWidget> {
                   ),
                 ),
                 Positioned(
-                  top: 8,
-                  right: 8,
-                  child: Icon(
-                    Icons.favorite,
-                    color: ColorConstants.betterRed,
-                  ),
-                )
+                    top: 8,
+                    right: 8,
+                    child: ProviderIcon(
+                      room: widget.product!,
+                    ))
               ],
             ),
             const SizedBox(

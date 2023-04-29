@@ -4,6 +4,8 @@ import 'package:storeapp/model/product_model.dart';
 import 'package:storeapp/widgets/fade_in_image_widget.dart';
 import 'package:storeapp/widgets/icons/circle_icon.dart';
 import 'package:storeapp/widgets/icons/icon_text_widget_column.dart';
+import 'package:storeapp/widgets/icons/icon_text_widget_row.dart';
+import 'package:storeapp/widgets/icons/provider_icon.dart';
 import 'package:storeapp/widgets/text_container.dart';
 
 class DetailPage extends StatefulWidget {
@@ -92,14 +94,11 @@ class _DetailPageState extends State<DetailPage> {
             ),
           ),
           Positioned(
-            right: 10,
-            top: 10,
-            child: CircleIcon(
-              iconSize: 25,
-              icon: Icons.favorite,
-              callBack: () {},
-            ),
-          ),
+              right: 10,
+              top: 10,
+              child: ProviderIcon(
+                room: widget.product,
+              )),
           Positioned(
             bottom: 0,
             left: 0,
@@ -222,13 +221,12 @@ class CardDetail extends StatelessWidget {
                     padding: const EdgeInsets.all(5),
                     color: const Color.fromARGB(255, 255, 96, 96),
                     onPressed: () {},
-                    child: const Text(
-                      'Book Now',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold),
-                    )),
+                    child: const IconTextWidgetRow(
+                        icon: Icons.shopping_cart_outlined,
+                        text: "Add to cart",
+                        align: MainAxisAlignment.center,
+                        textColor: Colors.white,
+                        color: Colors.white)),
               ),
             ],
           )
