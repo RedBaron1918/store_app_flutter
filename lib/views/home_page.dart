@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:storeapp/const_colors.dart';
 import 'package:storeapp/model/product_model.dart';
+import 'package:storeapp/views/detail_page.dart';
 import 'package:storeapp/widgets/cards/card_widget.dart';
 import 'package:storeapp/widgets/fade_in_image_widget.dart';
 import 'package:storeapp/widgets/future_widget.dart';
@@ -61,8 +62,7 @@ class _HomeState extends State<HomePage> {
               bgColor: ColorConstants.backgroundColor,
               txtColor: Colors.black,
             ),
-            SliverFillRemaining(
-              hasScrollBody: false,
+            SliverToBoxAdapter(
               child: FutureWidget(
                 futureData: Services.futureData,
                 builder: (AsyncSnapshot<ProductList> snapshot) {
@@ -143,16 +143,33 @@ class GridLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height * 1,
-      child: GetGridItem(
-          viewType: _viewType,
-          productData: ProductList(products: data),
-          crossAxisCount: 2,
-          builder: (context, product) {
-            return GridCard(productData: product!);
+    return GridView.builder(
+      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+        maxCrossAxisExtent: 250,
+        childAspectRatio: 1 / 2,
+        crossAxisSpacing: 15,
+        mainAxisSpacing: 20,
+      ),
+      itemCount: data.length,
+      shrinkWrap: true,
+      physics: const BouncingScrollPhysics(),
+      itemBuilder: (context, index) {
+        return InkWell(
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => DetailPage(
+                  product: data[index],
+                ),
+              ),
+            );
           },
-          count: data.length),
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height * 0.5,
+            child: CardWidget(product: data[index]),
+          ),
+        );
+      },
     );
   }
 }

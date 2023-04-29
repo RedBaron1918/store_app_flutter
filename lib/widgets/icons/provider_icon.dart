@@ -25,7 +25,6 @@ class ProviderIcon extends StatefulWidget {
 
 class _ProviderIconState extends State<ProviderIcon> {
   bool _isFavorite = false;
-  List<Product?> favorites = [];
   @override
   void initState() {
     super.initState();
@@ -39,7 +38,6 @@ class _ProviderIconState extends State<ProviderIcon> {
 
   void _toggleFavorite() async {
     favorite_provider.saveFavorite(widget.product.id.toString());
-
     setState(() {
       _isFavorite = !_isFavorite;
     });

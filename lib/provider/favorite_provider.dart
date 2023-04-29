@@ -6,6 +6,7 @@ const String cacheKey = 'favoriteIds';
 
 void saveFavorite(String productId) async {
   final prefs = await SharedPreferences.getInstance();
+
   final List<String> favorites = prefs.containsKey(cacheKey)
       ? prefs.getStringList(cacheKey) as List<String>
       : <String>[];

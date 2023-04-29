@@ -101,7 +101,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                       ),
-                Text("$sumOfPrice")
+                Text("$sumOfPrice"),
               ],
             ),
           )
