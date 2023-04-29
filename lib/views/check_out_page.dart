@@ -78,7 +78,10 @@ class _CheckOutPageState extends State<CheckOutPage> {
                                 ),
                               );
                             },
-                            child: CardWidget(product: products[index]),
+                            child: SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.5,
+                              child: CardWidget(product: products[index]),
+                            ),
                           );
                         },
                       )

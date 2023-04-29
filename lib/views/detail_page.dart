@@ -126,7 +126,9 @@ class CardDetail extends StatelessWidget {
         icon: Icons.apartment_sharp,
         text: "brand",
         textColor: Colors.white,
-        secondText: product.brand!,
+        secondText: (product.brand?.length ?? 0) > 15
+            ? '${product.brand!.substring(0, 15)}...'
+            : product.brand ?? '',
         textSize: 15,
         color: Colors.white,
       ),
@@ -189,11 +191,14 @@ class CardDetail extends StatelessWidget {
               fontSize: 18,
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: List.generate(
-              icons.length,
-              (index) => icons[index],
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 1,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: List.generate(
+                icons.length,
+                (index) => icons[index],
+              ),
             ),
           ),
           const Text(

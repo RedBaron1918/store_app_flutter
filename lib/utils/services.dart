@@ -4,7 +4,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:storeapp/model/product_model.dart';
 
 const String cacheKey = 'product_list';
-
 ProductList? productListResponse;
 
 class Services {
@@ -15,17 +14,18 @@ class Services {
       final expiresAt = DateTime.parse(cache['expiresAt']);
       if (expiresAt.isAfter(DateTime.now())) {
         productListResponse =
-            ProductList.fromJson(jsonDecode(cache['productList'])[0]);
+            ProductList.fromJson(jsonDecode(cache['productList']));
 
         return productListResponse!;
       }
     }
 
     final response = await http.get(Uri.parse(productUrl));
+
     if (response.statusCode == 200) {
       final decodedResponse = jsonDecode(response.body);
-
       final productList = ProductList.fromJson(decodedResponse);
+
       prefs.setString(
           cacheKey,
           jsonEncode({
@@ -33,7 +33,10 @@ class Services {
                 DateTime.now().add(const Duration(hours: 1)).toString(),
             'productList': response.body
           }));
+
       productListResponse = productList;
+      print(productListResponse?.products?[0].title);
+
       return productList;
     } else {
       throw Exception('Failed to fetch data');

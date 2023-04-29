@@ -111,7 +111,7 @@ class _CatalogPageState extends State<CatalogPage> {
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.33,
+                              height: MediaQuery.of(context).size.height * 0.36,
                               child: ListWidget(
                                 count: firstList.length,
                                 productData: ProductList(products: firstList),
