@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:storeapp/const_colors.dart';
 import 'package:storeapp/model/product_model.dart';
-import 'package:storeapp/views/detail_page.dart';
 import 'package:storeapp/widgets/fade_in_image_widget.dart';
 import 'package:storeapp/widgets/text_container.dart';
 
@@ -25,110 +24,65 @@ class _CardWidgetState extends State<CardWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => DetailPage(
-              product: widget.product,
-            ),
-          ),
-        );
-      },
-      child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 14, vertical: 15),
-        width: MediaQuery.of(context).size.width * 0.45,
-        decoration: BoxDecoration(
-          color: Colors.black,
-          borderRadius: BorderRadius.circular(15),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.6),
-              offset: const Offset(
-                0.0,
-                10.0,
-              ),
-              blurRadius: 10.0,
-              spreadRadius: -6.0,
-            ),
-          ],
-          image: DecorationImage(
-            colorFilter: ColorFilter.mode(
-              Colors.black.withOpacity(0.35),
-              BlendMode.multiply,
-            ),
-            image: NetworkImage(widget.product?.thumbnail ?? ''),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: Stack(
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+      child: Card(
+        color: ColorConstants.cardColor,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Align(
-              alignment: Alignment.center,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                child: Text(
-                  widget.product?.title ?? '',
-                  style: const TextStyle(
-                      fontSize: 19,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold),
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 2,
-                  textAlign: TextAlign.center,
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.bottomLeft,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(5),
-                    margin: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.4),
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Row(
-                      children: [
-                        const Icon(
-                          Icons.monetization_on,
-                          color: Colors.yellow,
-                          size: 18,
-                        ),
-                        const SizedBox(width: 7),
-                        Text(widget.product?.price.toString() ?? '',
-                            style: TextStyle(color: Colors.white)),
-                      ],
-                    ),
+            Stack(
+              children: [
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.45,
+                  height: 140,
+                  child: FadeInImageWidget(
+                    photo: widget.product!.images![0],
+                    radius: 6,
+                    fit: BoxFit.cover,
                   ),
-                  Container(
-                    padding: const EdgeInsets.all(5),
-                    margin: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.4),
-                      borderRadius: BorderRadius.circular(15),
+                ),
+                Positioned(
+                  top: 8,
+                  right: 8,
+                  child: Icon(
+                    Icons.favorite,
+                    color: ColorConstants.betterRed,
+                  ),
+                )
+              ],
+            ),
+            const SizedBox(
+              height: 7,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    (widget.product?.title?.length ?? 0) > 13
+                        ? '${widget.product!.title!.substring(0, 13)}...'
+                        : widget.product?.title ?? '',
+                    style: const TextStyle(
+                      color: Color(0xFF333333),
+                      fontWeight: FontWeight.w600,
+                      fontSize: 18,
                     ),
-                    child: Row(
-                      children: [
-                        const Icon(
-                          Icons.star,
-                          color: Colors.yellow,
-                          size: 18,
-                        ),
-                        const SizedBox(width: 7),
-                        Text(
-                          widget.product?.rating.toString() ?? '',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ],
-                    ),
-                  )
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(
+                    height: 4,
+                  ),
+                  TextContainer(text: "\$${widget.product?.price}"),
+                  const SizedBox(
+                    height: 4,
+                  ),
                 ],
               ),
-            ),
+            )
           ],
         ),
       ),

@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:storeapp/const_colors.dart';
 import 'package:storeapp/widgets/icons/circle_icon.dart';
 
-import 'icons/icon_text_widget.dart';
+import 'icons/icon_text_widget_row.dart';
 
 class SliverAppBarWidget extends StatelessWidget {
   const SliverAppBarWidget({
@@ -53,7 +53,7 @@ class SliverAppBarWidget extends StatelessWidget {
                     "Location",
                     style: TextStyle(color: Colors.grey),
                   ),
-                  IconTextWidget(
+                  IconTextWidgetRow(
                     align: MainAxisAlignment.center,
                     icon: Icons.location_on,
                     text: "Batumi",

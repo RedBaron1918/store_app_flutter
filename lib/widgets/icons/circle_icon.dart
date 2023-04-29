@@ -7,7 +7,7 @@ class CircleIcon extends StatelessWidget {
     this.width = 40,
     this.callBack,
     this.backgroundColor = Colors.white,
-    this.iconColor = Colors.red,
+    this.iconColor = const Color.fromARGB(255, 255, 96, 96),
     required this.icon,
     super.key,
   });

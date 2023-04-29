@@ -25,7 +25,18 @@ class ListWidget extends StatelessWidget {
       itemCount: count,
       itemBuilder: (context, index) {
         Product product = productData.products![index];
-        return builder(context, product);
+        return InkWell(
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => DetailPage(
+                  product: product,
+                ),
+              ),
+            );
+          },
+          child: builder(context, product),
+        );
       },
     );
   }

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class TextContainer extends StatelessWidget {
   const TextContainer({
     this.textColor = Colors.white,
-    this.backgroundColor = Colors.redAccent,
+    this.backgroundColor = const Color.fromARGB(255, 255, 96, 96),
     this.fontSize = 16,
     this.fontWeight = FontWeight.w600,
     required this.text,

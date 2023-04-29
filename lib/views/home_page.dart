@@ -6,7 +6,7 @@ import 'package:storeapp/widgets/fade_in_image_widget.dart';
 import 'package:storeapp/widgets/future_widget.dart';
 import 'package:storeapp/widgets/get_grid_item.dart';
 import 'package:storeapp/widgets/cards/grid_card.dart';
-import 'package:storeapp/widgets/icons/icon_text_widget.dart';
+import 'package:storeapp/widgets/icons/icon_text_widget_row.dart';
 import 'package:storeapp/widgets/list_widget.dart';
 import 'package:storeapp/widgets/search_bar.dart';
 import 'package:storeapp/widgets/sliver_appbar_widget.dart';
@@ -83,7 +83,7 @@ class _HomeState extends State<HomePage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: const [
-                            IconTextWidget(
+                            IconTextWidgetRow(
                               icon: Icons.star,
                               text: "Popular Items",
                               color: Colors.red,
@@ -97,7 +97,7 @@ class _HomeState extends State<HomePage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: const [
-                            IconTextWidget(
+                            IconTextWidgetRow(
                               icon: Icons.star,
                               text: "Popular Items",
                               color: Colors.red,
@@ -158,7 +158,7 @@ class ListLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.30,
+      height: MediaQuery.of(context).size.height * 0.33,
       child: ListWidget(
         count: data.length,
         productData: ProductList(products: data),

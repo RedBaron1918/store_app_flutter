@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:storeapp/const_colors.dart';
 import 'package:storeapp/model/product_model.dart';
 import 'package:storeapp/widgets/fade_in_image_widget.dart';
 import 'package:storeapp/widgets/icons/circle_icon.dart';
+import 'package:storeapp/widgets/icons/icon_text_widget_column.dart';
 import 'package:storeapp/widgets/text_container.dart';
 
 class DetailPage extends StatefulWidget {
@@ -10,7 +12,7 @@ class DetailPage extends StatefulWidget {
     required this.product,
   }) : super(key: key);
 
-  final Product? product;
+  final Product product;
 
   @override
   State<DetailPage> createState() => _DetailPageState();
@@ -48,7 +50,7 @@ class _DetailPageState extends State<DetailPage> {
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height * 0.4,
                   child: PageView.builder(
-                    itemCount: widget.product?.images?.length,
+                    itemCount: widget.product.images?.length,
                     pageSnapping: true,
                     onPageChanged: (page) {
                       setState(() {
@@ -56,7 +58,7 @@ class _DetailPageState extends State<DetailPage> {
                       });
                     },
                     itemBuilder: (context, index) {
-                      final photo = widget.product!.images![index];
+                      final photo = widget.product.images![index];
                       return FadeInImageWidget(
                         photo: photo,
                         radius: 6,
@@ -83,7 +85,7 @@ class _DetailPageState extends State<DetailPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children:
-                        indicators(widget.product?.images?.length, activePage),
+                        indicators(widget.product.images?.length, activePage),
                   ),
                 ),
               ],
@@ -113,12 +115,41 @@ class _DetailPageState extends State<DetailPage> {
 }
 
 class CardDetail extends StatelessWidget {
-  const CardDetail({super.key, this.product});
+  const CardDetail({super.key, required this.product});
 
-  final Product? product;
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
+    List<IconTextWidgetColumn> icons = [
+      IconTextWidgetColumn(
+        backgroundColor: ColorConstants.betterRed,
+        icon: Icons.apartment_sharp,
+        text: "brand",
+        textColor: Colors.white,
+        secondText: product.brand!,
+        textSize: 15,
+        color: Colors.white,
+      ),
+      IconTextWidgetColumn(
+        backgroundColor: ColorConstants.betterRed,
+        icon: Icons.category,
+        text: "category",
+        textColor: Colors.white,
+        secondText: product.category!,
+        color: Colors.white,
+        textSize: 15,
+      ),
+      IconTextWidgetColumn(
+        backgroundColor: ColorConstants.betterRed,
+        icon: Icons.shopping_cart_outlined,
+        textSize: 15,
+        text: "In Stock",
+        textColor: Colors.white,
+        secondText: product.stock.toString(),
+        color: Colors.white,
+      ),
+    ];
     return Container(
       height: MediaQuery.of(context).size.height * 0.65,
       padding: const EdgeInsets.all(12),
@@ -137,7 +168,7 @@ class CardDetail extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "${product?.title}",
+                "${product.title}",
                 style: const TextStyle(
                   color: Color(0xFF333333),
                   fontWeight: FontWeight.w300,
@@ -145,10 +176,26 @@ class CardDetail extends StatelessWidget {
                 ),
               ),
               TextContainer(
-                text: "\$${product?.price}",
+                text: "\$${product.price}",
                 fontSize: 18,
+                backgroundColor: ColorConstants.betterRed,
               ),
             ],
+          ),
+          const Text(
+            "About Product",
+            style: TextStyle(
+              color: Color(0xFF333333),
+              fontWeight: FontWeight.w500,
+              fontSize: 18,
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: List.generate(
+              icons.length,
+              (index) => icons[index],
+            ),
           ),
           const Text(
             "Description",
@@ -159,7 +206,7 @@ class CardDetail extends StatelessWidget {
             ),
           ),
           Text(
-            "${product?.description}",
+            "${product.description}",
             style: const TextStyle(
               color: Color.fromARGB(255, 119, 119, 119),
               fontWeight: FontWeight.w300,

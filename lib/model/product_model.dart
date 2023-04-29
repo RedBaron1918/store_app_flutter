@@ -45,6 +45,7 @@ class Product {
     this.price,
     this.rating,
     this.brand,
+    this.stock,
     this.category,
     this.thumbnail,
     this.images,
@@ -69,6 +70,7 @@ class Product {
         price: json["price"],
         rating: json["rating"]?.toDouble(),
         brand: json["brand"],
+        stock: json["stock"],
         category: json["category"],
         thumbnail: json["thumbnail"],
         images: json["images"] == null

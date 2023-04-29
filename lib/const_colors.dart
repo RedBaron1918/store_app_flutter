@@ -15,4 +15,5 @@ class ColorConstants {
   static Color backgroundColor = Colors.white;
   static Color titleColor = hexToColor('#23395d');
   static Color test = hexToColor('#1E3F66');
+  static Color betterRed = const Color.fromARGB(255, 255, 96, 96);
 }
