@@ -22,10 +22,19 @@ class _CheckOutPageState extends State<CheckOutPage> {
   void initState() {
     super.initState();
     _loadFavorites();
+    _getPrice();
   }
 
   void _loadFavorites() async {
     products = await getFavorites();
+    _getPrice();
+    setState(() {});
+  }
+
+  void _getPrice() {
+    for (var e in products) {
+      sumOfPrice += e!.price!;
+    }
     setState(() {});
   }
 
@@ -92,6 +101,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                       ),
+                Text("$sumOfPrice")
               ],
             ),
           )

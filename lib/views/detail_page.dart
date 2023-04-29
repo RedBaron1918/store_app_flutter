@@ -97,7 +97,7 @@ class _DetailPageState extends State<DetailPage> {
               right: 10,
               top: 10,
               child: ProviderIcon(
-                room: widget.product,
+                product: widget.product,
               )),
           Positioned(
             bottom: 0,

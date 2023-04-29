@@ -48,7 +48,7 @@ class _CardWidgetState extends State<CardWidget> {
                     top: 8,
                     right: 8,
                     child: ProviderIcon(
-                      room: widget.product!,
+                      product: widget.product!,
                     ))
               ],
             ),

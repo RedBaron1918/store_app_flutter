@@ -9,7 +9,7 @@ class ProviderIcon extends StatefulWidget {
     this.width = 40,
     this.backgroundColor = Colors.white,
     this.iconColor = Colors.red,
-    required this.room,
+    required this.product,
     super.key,
   });
   final Color? iconColor;
@@ -17,7 +17,7 @@ class ProviderIcon extends StatefulWidget {
   final double? height;
   final double? width;
   final double? iconSize;
-  final Product room;
+  final Product product;
 
   @override
   State<ProviderIcon> createState() => _ProviderIconState();
@@ -33,14 +33,16 @@ class _ProviderIconState extends State<ProviderIcon> {
   }
 
   void isFavorite() async {
-    _isFavorite = await favorite_provider.isFavorite(widget.room);
+    _isFavorite = await favorite_provider.isFavorite(widget.product);
     setState(() {});
   }
 
   void _toggleFavorite() async {
-    favorite_provider.saveFavorite(widget.room.id!.toString());
-    _isFavorite = !_isFavorite;
-    setState(() {});
+    favorite_provider.saveFavorite(widget.product.id.toString());
+
+    setState(() {
+      _isFavorite = !_isFavorite;
+    });
   }
 
   @override
