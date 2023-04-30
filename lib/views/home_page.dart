@@ -5,8 +5,6 @@ import 'package:storeapp/views/detail_page.dart';
 import 'package:storeapp/widgets/cards/card_widget.dart';
 import 'package:storeapp/widgets/fade_in_image_widget.dart';
 import 'package:storeapp/widgets/future_widget.dart';
-import 'package:storeapp/widgets/get_grid_item.dart';
-import 'package:storeapp/widgets/cards/grid_card.dart';
 import 'package:storeapp/widgets/icons/icon_text_widget_row.dart';
 import 'package:storeapp/widgets/list_widget.dart';
 import 'package:storeapp/widgets/search_bar.dart';

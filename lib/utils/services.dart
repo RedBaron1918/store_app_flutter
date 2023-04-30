@@ -35,7 +35,6 @@ class Services {
           }));
 
       productListResponse = productList;
-      print(productListResponse?.products?[0].title);
 
       return productList;
     } else {

@@ -3,6 +3,7 @@ import 'package:storeapp/const_colors.dart';
 import 'package:storeapp/model/category_card_model.dart';
 import 'package:storeapp/model/product_model.dart';
 import 'package:storeapp/utils/services.dart';
+import 'package:storeapp/views/check_out_page.dart';
 import 'package:storeapp/widgets/cards/card_widget.dart';
 import 'package:storeapp/widgets/cards/category_card.dart';
 import 'package:storeapp/widgets/fade_in_image_widget.dart';
@@ -59,6 +60,18 @@ class _CatalogPageState extends State<CatalogPage> {
                             fontSize: 35,
                             fontWeight: FontWeight.bold,
                             color: ColorConstants.titleColor),
+                      ),
+                      CircleIcon(
+                        icon: Icons.shopping_cart,
+                        iconSize: 25,
+                        callBack: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const CheckOutPage(),
+                            ),
+                          );
+                        },
+                        iconColor: Colors.black,
                       )
                     ],
                   ),

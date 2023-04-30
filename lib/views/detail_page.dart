@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:storeapp/const_colors.dart';
 import 'package:storeapp/model/product_model.dart';
+import 'package:storeapp/widgets/button_provider.dart';
 import 'package:storeapp/widgets/fade_in_image_widget.dart';
 import 'package:storeapp/widgets/icons/circle_icon.dart';
 import 'package:storeapp/widgets/icons/icon_text_widget_column.dart';
@@ -220,19 +221,9 @@ class CardDetail extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: MaterialButton(
-                    shape: const StadiumBorder(),
-                    height: 50,
-                    padding: const EdgeInsets.all(5),
-                    color: const Color.fromARGB(255, 255, 96, 96),
-                    onPressed: () {},
-                    child: const IconTextWidgetRow(
-                        icon: Icons.shopping_cart_outlined,
-                        text: "Add to cart",
-                        align: MainAxisAlignment.center,
-                        textColor: Colors.white,
-                        color: Colors.white)),
-              ),
+                  child: ButtonProvider(
+                product: product,
+              )),
             ],
           )
         ],

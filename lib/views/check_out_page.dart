@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:storeapp/const_colors.dart';
 import 'package:storeapp/model/product_model.dart';
-import 'package:storeapp/provider/favorite_provider.dart';
+import 'package:storeapp/provider/check_out_provider.dart';
 import 'package:storeapp/views/detail_page.dart';
 import 'package:storeapp/widgets/cards/card_widget.dart';
 import 'package:storeapp/widgets/icons/circle_icon.dart';
-import 'package:storeapp/widgets/search_bar.dart';
-import 'package:storeapp/widgets/sliver_appbar_widget.dart';
 
 class CheckOutPage extends StatefulWidget {
   const CheckOutPage({super.key});
@@ -22,12 +20,12 @@ class _CheckOutPageState extends State<CheckOutPage> {
   @override
   void initState() {
     super.initState();
-    _loadFavorites();
+    _loadCheckOutItems();
     _getPrice();
   }
 
-  void _loadFavorites() async {
-    products = await getFavorites();
+  void _loadCheckOutItems() async {
+    products = await getCheckOuts();
     _getPrice();
     setState(() {});
   }

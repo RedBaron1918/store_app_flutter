@@ -16,25 +16,15 @@ class FavoritePage extends StatefulWidget {
 
 class _FavoritePageState extends State<FavoritePage> {
   List<Product?> products = [];
-  int sumOfPrice = 0;
 
   @override
   void initState() {
     super.initState();
     _loadFavorites();
-    _getPrice();
   }
 
   void _loadFavorites() async {
     products = await getFavorites();
-    _getPrice();
-    setState(() {});
-  }
-
-  void _getPrice() {
-    for (var e in products) {
-      sumOfPrice += e!.price!;
-    }
     setState(() {});
   }
 
@@ -45,7 +35,7 @@ class _FavoritePageState extends State<FavoritePage> {
       body: CustomScrollView(
         slivers: [
           const SliverAppBarWidget(
-            leading: false,
+            leading: true,
             text: "Favorites",
             bgColor: Colors.white,
             txtColor: Colors.black,
@@ -101,7 +91,6 @@ class _FavoritePageState extends State<FavoritePage> {
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                       ),
-                Text("$sumOfPrice"),
               ],
             ),
           )
