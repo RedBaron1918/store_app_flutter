@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:storeapp/const_colors.dart';
 import 'package:storeapp/model/product_model.dart';
 import 'package:storeapp/provider/check_out_provider.dart';
@@ -33,6 +34,22 @@ class _CheckOutPageState extends State<CheckOutPage> {
       sumOfPrice += e!.price!;
     }
     setState(() {});
+  }
+
+  final String cacheKey = 'checkOutId';
+
+  Future<void> deleteCheckout(String productId) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    final List<String> checkOut = prefs.containsKey(cacheKey)
+        ? prefs.getStringList(cacheKey) as List<String>
+        : <String>[];
+
+    checkOut.remove(productId);
+
+    prefs.setStringList(cacheKey, checkOut);
+    _loadCheckOutItems();
+    _getPrice();
   }
 
   @override
@@ -72,7 +89,14 @@ class _CheckOutPageState extends State<CheckOutPage> {
                                       products[index]?.thumbnail ?? ''),
                                   title: Text("${products[index]?.title}"),
                                   subtitle: Text("\$${products[index]?.price}"),
-                                  trailing: const Icon(Icons.delete),
+                                  trailing: IconButton(
+                                    icon: Icon(Icons.delete),
+                                    onPressed: () {
+                                      deleteCheckout(
+                                          products[index]!.id.toString());
+                                      setState(() {});
+                                    },
+                                  ),
                                 ),
                               ),
                             );
