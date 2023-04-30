@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:storeapp/const_colors.dart';
 import 'package:storeapp/model/product_model.dart';
 import 'package:storeapp/provider/check_out_provider.dart';
-import 'package:storeapp/views/detail_page.dart';
-import 'package:storeapp/widgets/cards/card_widget.dart';
 import 'package:storeapp/widgets/icons/circle_icon.dart';
 
 class CheckOutPage extends StatefulWidget {
@@ -56,36 +54,30 @@ class _CheckOutPageState extends State<CheckOutPage> {
           SliverToBoxAdapter(
             child: Column(
               mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 products.isNotEmpty
-                    ? GridView.builder(
-                        gridDelegate:
-                            const SliverGridDelegateWithMaxCrossAxisExtent(
-                          maxCrossAxisExtent: 250,
-                          childAspectRatio: 1 / 2,
-                          crossAxisSpacing: 15,
-                          mainAxisSpacing: 20,
-                        ),
-                        itemCount: products.length,
-                        shrinkWrap: true,
-                        physics: const BouncingScrollPhysics(),
-                        itemBuilder: (context, index) {
-                          return InkWell(
-                            onTap: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => DetailPage(
-                                    product: products[index]!,
-                                  ),
+                    ? SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.7,
+                        width: MediaQuery.of(context).size.width * 1,
+                        child: ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          itemCount: products.length,
+                          itemBuilder: (context, index) {
+                            return SizedBox(
+                              child: Card(
+                                child: ListTile(
+                                  onTap: () {},
+                                  leading: Image.network(
+                                      products[index]?.thumbnail ?? ''),
+                                  title: Text("${products[index]?.title}"),
+                                  subtitle: Text("\$${products[index]?.price}"),
+                                  trailing: const Icon(Icons.delete),
                                 ),
-                              );
-                            },
-                            child: SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.5,
-                              child: CardWidget(product: products[index]),
-                            ),
-                          );
-                        },
+                              ),
+                            );
+                          },
+                        ),
                       )
                     : const Center(
                         child: Text(

@@ -5,7 +5,6 @@ import 'package:storeapp/widgets/button_provider.dart';
 import 'package:storeapp/widgets/fade_in_image_widget.dart';
 import 'package:storeapp/widgets/icons/circle_icon.dart';
 import 'package:storeapp/widgets/icons/icon_text_widget_column.dart';
-import 'package:storeapp/widgets/icons/icon_text_widget_row.dart';
 import 'package:storeapp/widgets/icons/provider_icon.dart';
 import 'package:storeapp/widgets/text_container.dart';
 
