@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:storeapp/const_colors.dart';
+import 'package:storeapp/views/check_out_page.dart';
 import 'package:storeapp/widgets/icons/circle_icon.dart';
 
 import 'icons/icon_text_widget_row.dart';
@@ -64,9 +65,16 @@ class SliverAppBarWidget extends StatelessWidget {
                   ),
                 ],
               ),
-              const CircleIcon(
-                icon: Icons.notifications,
+              CircleIcon(
+                icon: Icons.shopping_cart,
                 iconSize: 25,
+                callBack: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const CheckOutPage(),
+                    ),
+                  );
+                },
                 iconColor: Colors.black,
               )
             ],

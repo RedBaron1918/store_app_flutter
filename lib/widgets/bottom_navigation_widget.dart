@@ -31,7 +31,7 @@ class BottomNavigationWidget extends StatelessWidget {
           label: 'explore',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.shopping_cart_rounded),
+          icon: Icon(Icons.favorite),
           label: 'favorite',
         ),
         BottomNavigationBarItem(

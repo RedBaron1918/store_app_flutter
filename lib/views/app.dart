@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:storeapp/views/catalog_page.dart';
-import 'package:storeapp/views/check_out_page.dart';
+import 'package:storeapp/views/favorige_page.dart';
 import 'package:storeapp/views/home_page.dart';
 import 'package:storeapp/views/profile_page.dart';
 import 'package:storeapp/widgets/bottom_navigation_widget.dart';
@@ -18,7 +18,7 @@ class _AppState extends State<App> {
   List<Widget> pageList = [
     const HomePage(),
     const CatalogPage(),
-    const CheckOutPage(),
+    const FavoritePage(),
     const ProfilePage()
   ];
   late final ScrollController controller = ScrollController();
