@@ -35,7 +35,7 @@ class _FavoritePageState extends State<FavoritePage> {
       body: CustomScrollView(
         slivers: [
           const SliverAppBarWidget(
-            leading: true,
+            leading: false,
             text: "Favorites",
             bgColor: Colors.white,
             txtColor: Colors.black,

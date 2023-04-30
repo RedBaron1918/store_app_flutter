@@ -21,11 +21,11 @@ class CatalogPage extends StatefulWidget {
 
 class _CatalogPageState extends State<CatalogPage> {
   final categoryCardModelList = <CategoryCardModel>[
-    CategoryCardModel("Smartphones"),
-    CategoryCardModel("TV"),
-    CategoryCardModel("Accesesories"),
-    CategoryCardModel("jewerly"),
-    CategoryCardModel("clothes")
+    CategoryCardModel("smartphones"),
+    CategoryCardModel("laptops"),
+    CategoryCardModel("skincare"),
+    CategoryCardModel("groceries"),
+    CategoryCardModel("home-decoration")
   ];
   CategoryCardModel? _selectedCardModel;
 
@@ -118,6 +118,12 @@ class _CatalogPageState extends State<CatalogPage> {
                     builder: (AsyncSnapshot<ProductList> snapshot) {
                       final products = snapshot.data?.products ?? [];
                       final firstList = products.take(10).toList();
+                      final filteredProducts = products
+                          .where((product) =>
+                              product.category ==
+                              _selectedCardModel?.categoryCardModelName)
+                          .toList();
+
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
@@ -126,8 +132,13 @@ class _CatalogPageState extends State<CatalogPage> {
                             SizedBox(
                               height: MediaQuery.of(context).size.height * 0.36,
                               child: ListWidget(
-                                count: firstList.length,
-                                productData: ProductList(products: firstList),
+                                count: filteredProducts.isNotEmpty
+                                    ? filteredProducts.length
+                                    : firstList.length,
+                                productData: ProductList(
+                                    products: filteredProducts.isNotEmpty
+                                        ? filteredProducts
+                                        : firstList),
                                 dir: Axis.horizontal,
                                 builder: (context, product) {
                                   return CardWidget(product: product!);
@@ -139,10 +150,15 @@ class _CatalogPageState extends State<CatalogPage> {
                                   'https://i.ytimg.com/vi/c3xmfpugW-0/maxresdefault.jpg',
                             ),
                             SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.33,
+                              height: MediaQuery.of(context).size.height * 0.36,
                               child: ListWidget(
-                                count: firstList.length,
-                                productData: ProductList(products: firstList),
+                                count: filteredProducts.isNotEmpty
+                                    ? filteredProducts.length
+                                    : firstList.length,
+                                productData: ProductList(
+                                    products: filteredProducts.isNotEmpty
+                                        ? filteredProducts
+                                        : firstList),
                                 dir: Axis.horizontal,
                                 builder: (context, product) {
                                   return CardWidget(product: product!);

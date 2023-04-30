@@ -46,7 +46,7 @@ class ProfilePage extends StatelessWidget {
                     maxRadius: 45,
                     backgroundColor: Color.fromARGB(255, 255, 255, 255),
                     backgroundImage: NetworkImage(
-                        "https://scontent.ftbs5-2.fna.fbcdn.net/v/t1.18169-9/1391743_603079143062900_1606433576_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=IzVRfgAz8P8AX8LH0nX&_nc_ht=scontent.ftbs5-2.fna&oh=00_AfC0t0cP4wxY2R1FPTntC20Mat35rgn9LWwoP0_1Vn4Crg&oe=644D488A"),
+                        "https://scontent.ftbs5-2.fna.fbcdn.net/v/t1.18169-9/1391743_603079143062900_1606433576_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=d5TYkcT2vkcAX9B5KEd&_nc_ht=scontent.ftbs5-2.fna&oh=00_AfAy65pFR2FT_pysRX0VGNpRbfsl3bFYJGH5A4tlQdvwOQ&oe=6476270A"),
                   ),
                   const Text(
                     "John Doe",
