@@ -30,6 +30,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
   }
 
   void _getPrice() {
+    sumOfPrice = 0;
     for (var e in products) {
       sumOfPrice += e!.price!;
     }
@@ -48,8 +49,9 @@ class _CheckOutPageState extends State<CheckOutPage> {
     checkOut.remove(productId);
 
     prefs.setStringList(cacheKey, checkOut);
-    _loadCheckOutItems();
+    products = await getCheckOuts();
     _getPrice();
+    setState(() {});
   }
 
   @override
